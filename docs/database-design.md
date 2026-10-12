@@ -12,52 +12,52 @@ Berikut adalah diagram alur proses perbaikan barang elektronik (*End-to-End Serv
 
 ```mermaid
 flowchart TD
-    Start([Mulai: Pelanggan Datang]) --> Intake[Penerimaan & Registrasi: Catat Data Pelanggan, Perangkat, Keluhan & Cacat Fisik]
-    Intake --> Ticket[Terbitkan Tiket Servis - Cetak Tanda Terima Masuk]
-    Ticket --> Inspect[Teknisi Melakukan Pengecekan & Diagnosis Kerusakan]
+    Start(["Mulai: Pelanggan Datang"]) --> Intake["Penerimaan & Registrasi: Catat Data Pelanggan, Perangkat, Keluhan & Cacat Fisik"]
+    Intake --> Ticket["Terbitkan Tiket Servis - Cetak Tanda Terima Masuk"]
+    Ticket --> Inspect["Teknisi Melakukan Pengecekan & Diagnosis Kerusakan"]
     
-    Inspect --> DecisionRepair{Apakah Barang Dapat Diservis?}
+    Inspect --> DecisionRepair{"Apakah Barang Dapat Diservis?"}
     
     %% Cabang Tidak Dapat Diservis
-    DecisionRepair -- Tidak --> Unrepairable[Catat Alasan Teknis Tidak Dapat Diservis]
-    Unrepairable --> InfoUnrepairable[CS Infokan ke Pelanggan & Siapkan Berita Acara Pengembalian]
-    InfoUnrepairable --> HandoverUnrepairable[Barang Diserahkan Kembali ke Pelanggan]
-    HandoverUnrepairable --> CloseUnrepairable([Selesai: Tiket Ditutup - Unrepairable])
+    DecisionRepair -->|Tidak| Unrepairable["Catat Alasan Teknis Tidak Dapat Diservis"]
+    Unrepairable --> InfoUnrepairable["CS Infokan ke Pelanggan & Siapkan Berita Acara Pengembalian"]
+    InfoUnrepairable --> HandoverUnrepairable["Barang Diserahkan Kembali ke Pelanggan"]
+    HandoverUnrepairable --> CloseUnrepairable(["Selesai: Tiket Ditutup - Unrepairable"])
     
     %% Cabang Dapat Diservis
-    DecisionRepair -- Ya --> Estimate[Teknisi Menyusun Estimasi Biaya Jasa & Suku Cadang]
-    Estimate --> QuotationGate{Persetujuan Pelanggan terhadap Estimasi?}
+    DecisionRepair -->|Ya| Estimate["Teknisi Menyusun Estimasi Biaya Jasa & Suku Cadang"]
+    Estimate --> QuotationGate{"Persetujuan Pelanggan terhadap Estimasi?"}
     
-    QuotationGate -- Ditolak --> QuoteReject[Status Penawaran: Ditolak oleh Pelanggan]
-    QuoteReject --> InfoCancel[CS Konfirmasi Pembatalan Servis & Siapkan Pengembalian]
-    InfoCancel --> HandoverCancel[Barang Diserahkan Kembali ke Pelanggan]
-    HandoverCancel --> CloseCancel([Selesai: Tiket Ditutup - Dibatalkan])
+    QuotationGate -->|Ditolak| QuoteReject["Status Penawaran: Ditolak oleh Pelanggan"]
+    QuoteReject --> InfoCancel["CS Konfirmasi Pembatalan Servis & Siapkan Pengembalian"]
+    InfoCancel --> HandoverCancel["Barang Diserahkan Kembali ke Pelanggan"]
+    HandoverCancel --> CloseCancel(["Selesai: Tiket Ditutup - Dibatalkan"])
     
-    QuotationGate -- Disetujui --> PartCheck{Membutuhkan Suku Cadang / Sparepart?}
+    QuotationGate -->|Disetujui| PartCheck{"Membutuhkan Suku Cadang / Sparepart?"}
     
-    PartCheck -- Tidak --> RepairDirect[Proses Perbaikan Teknis: Soldering, Jalur PCB, Reballing, Flashing]
+    PartCheck -->|Tidak| RepairDirect["Proses Perbaikan Teknis: Soldering, Jalur PCB, Reballing, Flashing"]
     
-    PartCheck -- Ya --> StockCheck{Suku Cadang Tersedia di Gudang?}
-    StockCheck -- Ya --> ReservePart[Alokasikan Sparepart dari Gudang & Kunci Harga Jual]
-    StockCheck -- Tidak --> IndentOrder[Pemesanan Suku Cadang / Indent - Status: Menunggu Part]
-    IndentOrder --> PartArrive[Suku Cadang Tiba di Workshop]
+    PartCheck -->|Ya| StockCheck{"Suku Cadang Tersedia di Gudang?"}
+    StockCheck -->|Ya| ReservePart["Alokasikan Sparepart dari Gudang & Kunci Harga Jual"]
+    StockCheck -->|Tidak| IndentOrder["Pemesanan Suku Cadang / Indent - Status: Menunggu Part"]
+    IndentOrder --> PartArrive["Suku Cadang Tiba di Workshop"]
     PartArrive --> ReservePart
-    ReservePart --> RepairPart[Proses Perbaikan & Pemasangan Sparepart]
+    ReservePart --> RepairPart["Proses Perbaikan & Pemasangan Sparepart"]
     
-    RepairDirect --> QC
-    RepairPart --> QC[Pengujian Mutu / QC Testing]
+    RepairDirect --> QC["Pengujian Mutu / QC Testing"]
+    RepairPart --> QC
     
-    QC --> QCTest{Lulus Uji Fungsi & Stabilitas?}
-    QCTest -- Gagal --> ReRepair[Perbaikan Ulang oleh Teknisi]
+    QC --> QCTest{"Lulus Uji Fungsi & Stabilitas?"}
+    QCTest -->|Gagal| ReRepair["Perbaikan Ulang oleh Teknisi"]
     ReRepair --> QC
     
-    QCTest -- Lulus --> Ready[Status: Servis Selesai & Siap Diambil]
-    Ready --> Billing[Sistem Menghitung Total Biaya & Terbitkan Invoice Final]
+    QCTest -->|Lulus| Ready["Status: Servis Selesai & Siap Diambil"]
+    Ready --> Billing["Sistem Menghitung Total Biaya & Terbitkan Invoice Final"]
     
-    Billing --> Payment[Pelanggan Membayar Tagihan: Tunai / Transfer / QRIS]
-    Payment --> Warranty[Aktivasi Garansi Servis Purna Jual & Cetak Bukti Lunas]
-    Warranty --> HandoverSuccess[Serah Terima Barang & Tanda Tangan Berita Acara]
-    HandoverSuccess --> CloseSuccess([Selesai: Tiket Ditutup - Sukses])
+    Billing --> Payment["Pelanggan Membayar Tagihan: Tunai / Transfer / QRIS"]
+    Payment --> Warranty["Aktivasi Garansi Servis Purna Jual & Cetak Bukti Lunas"]
+    Warranty --> HandoverSuccess["Serah Terima Barang & Tanda Tangan Berita Acara"]
+    HandoverSuccess --> CloseSuccess(["Selesai: Tiket Ditutup - Sukses"])
 ```
 
 ---

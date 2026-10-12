@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Windows Subsystem / Explorer metadata
+*:Zone.Identifier
+
+# IDE & Editor
+.vscode/
+.idea/
+
+# Database data directories (if any local folder used)
+postgres_data/
+
+# OS files
+.DS_Store
+Thumbs.db

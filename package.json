@@ -1,0 +1,26 @@
+{
+  "name": "serba-service-center",
+  "version": "1.0.0",
+  "description": "Sistem Informasi Manajemen Jasa Perbaikan Barang Elektronik",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "demo": "node scripts/demo-flow.js"
+  },
+  "keywords": [
+    "service-center",
+    "repair-management",
+    "postgresql",
+    "express",
+    "nodejs"
+  ],
+  "author": "Serba Service Center Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  }
+}

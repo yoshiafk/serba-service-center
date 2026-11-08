@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serba Service Center - Dashboard Presentasi Sistem</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Mermaid.js for rich diagram rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+  </script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="logo-icon">🔧</div>
+      <div>
+        <h1>Serba Service Center</h1>
+        <p>Sistem Informasi Manajemen Jasa Perbaikan Barang Elektronik</p>
+      </div>
+    </div>
+    <div class="header-badges">
+      <span class="badge badge-db">PostgreSQL 16</span>
+      <span class="badge badge-js">Node.js Express</span>
+      <span class="badge badge-docker">Docker</span>
+    </div>
+  </header>
+
+  <nav class="app-nav">
+    <button class="nav-btn active" data-tab="tab-erd">📊 1. ERD Design</button>
+    <button class="nav-btn" data-tab="tab-usecase">🎯 2. Use Case Diagram</button>
+    <button class="nav-btn" data-tab="tab-flow">⚡ 3. Alur Operasional (Flow)</button>
+    <button class="nav-btn" data-tab="tab-live">💻 4. Live API & Transaksi</button>
+  </nav>
+
+  <main class="main-content">
+    <!-- TAB 1: ERD DESIGN -->
+    <section id="tab-erd" class="tab-pane active">
+      <div class="section-header">
+        <h2>Entity Relationship Diagram (ERD) - 14 Entitas (3NF)</h2>
+        <p>Model relasional yang dinormalisasi hingga Bentuk Normal Ketiga (3NF), dilengkapi spesifikasi Primary Key, Foreign Key, dan Unique Constraints.</p>
+      </div>
+
+      <div class="card diagram-container">
+        <div class="diagram-toolbar">
+          <span>Visualisasi Mermaid ERD</span>
+          <button class="btn btn-sm" onclick="renderMermaid('erd-view')">🔄 Render Ulang</button>
+        </div>
+        <div id="erd-view" class="mermaid-target">Memuat diagram ERD...</div>
+      </div>
+
+      <div class="entity-grid">
+        <div class="entity-card">
+          <h3>Master Data</h3>
+          <ul>
+            <li><code>users</code>: Akun staf (Admin, CS, Teknisi, Kasir)</li>
+            <li><code>customers</code>: Profil pelanggan pemilik barang</li>
+            <li><code>device_categories</code>: Klasifikasi perangkat</li>
+            <li><code>customer_devices</code>: Data fisik unit elektronik</li>
+            <li><code>spareparts</code>: Katalog & stok suku cadang</li>
+          </ul>
+        </div>
+        <div class="entity-card">
+          <h3>Transaksi Servis</h3>
+          <ul>
+            <li><code>service_tickets</code>: Transaksi perbaikan inti</li>
+            <li><code>service_quotations</code>: Estimasi biaya & persetujuan</li>
+            <li><code>service_spareparts</code>: Detail pemakaian suku cadang</li>
+            <li><code>service_qc_tests</code>: Pengujian kendali mutu fungsi</li>
+          </ul>
+        </div>
+        <div class="entity-card">
+          <h3>Keuangan & Purna Jual</h3>
+          <ul>
+            <li><code>invoices</code>: Faktur tagihan jasa & part</li>
+            <li><code>payments</code>: Pembayaran DP & Pelunasan</li>
+            <li><code>service_warranties</code>: Polis garansi servis aktif</li>
+            <li><code>device_handovers</code>: Berita acara serah terima</li>
+            <li><code>service_status_history</code>: Audit trail status</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: USE CASE DIAGRAM -->
+    <section id="tab-usecase" class="tab-pane">
+      <div class="section-header">
+        <h2>Design Use Case Diagram & Skenario Sistem</h2>
+        <p>Pemodelan fungsional berorientasi objek yang memetakan interaksi 5 aktor dengan batasan sistem Serba Service Center.</p>
+      </div>
+
+      <div class="card diagram-container">
+        <div class="diagram-toolbar">
+          <span>Visualisasi Use Case Diagram</span>
+          <button class="btn btn-sm" onclick="renderMermaid('usecase-view')">🔄 Render Ulang</button>
+        </div>
+        <div id="usecase-view" class="mermaid-target">Memuat Use Case Diagram...</div>
+      </div>
+
+      <div class="card scenario-box">
+        <h3>Tabel Aktor & Lingkup Akses</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Aktor</th>
+              <th>Tipe</th>
+              <th>Use Case Terkait</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pelanggan (Customer)</strong></td>
+              <td>Eksternal</td>
+              <td>Daftar Servis, Persetujuan Estimasi, Pembayaran, Pengambilan Barang & Garansi</td>
+            </tr>
+            <tr>
+              <td><strong>Customer Service (CS)</strong></td>
+              <td>Internal</td>
+              <td>Registrasi Pelanggan/Perangkat, Terbitkan Tiket, Konfirmasi Quotation, Serah Terima</td>
+            </tr>
+            <tr>
+              <td><strong>Teknisi (Technician)</strong></td>
+              <td>Internal</td>
+              <td>Diagnosis Kerusakan, Susun Estimasi, Eksekusi Reparasi, Alokasi Sparepart, Uji QC</td>
+            </tr>
+            <tr>
+              <td><strong>Kasir (Cashier)</strong></td>
+              <td>Internal</td>
+              <td>Penerbitan Faktur (Invoice), Penerimaan Pembayaran (Cash/Transfer/QRIS), Cetak Nota</td>
+            </tr>
+            <tr>
+              <td><strong>Administrator</strong></td>
+              <td>Internal</td>
+              <td>Manajemen Master Data, Inventaris Suku Cadang, Audit Jejak Status, Laporan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 3: OPERATIONAL FLOW -->
+    <section id="tab-flow" class="tab-pane">
+      <div class="section-header">
+        <h2>Diagram Alur Operasional Perbaikan (End-to-End Service Flow)</h2>
+        <p>Alur logika pengerjaan dari intake loket, gerbang persetujuan estimasi (*quotation gate*), penanganan sparepart indent, kendali mutu QC, hingga serah terima.</p>
+      </div>
+
+      <div class="card diagram-container">
+        <div class="diagram-toolbar">
+          <span>Flowchart Proses Bisnis</span>
+          <button class="btn btn-sm" onclick="renderMermaid('flow-view')">🔄 Render Ulang</button>
+        </div>
+        <div id="flow-view" class="mermaid-target">Memuat Diagram Alur...</div>
+      </div>
+    </section>
+
+    <!-- TAB 4: LIVE API & TRANSACTIONS -->
+    <section id="tab-live" class="tab-pane">
+      <div class="section-header">
+        <h2>Live API & Transaksi Data PostgreSQL (Node.js Client)</h2>
+        <p>Interaksi langsung dengan database PostgreSQL melalui RESTful API backend JavaScript.</p>
+      </div>
+
+      <div class="live-grid">
+        <div class="card live-box">
+          <div class="box-header">
+            <h3>Daftar Tiket Servis Aktif</h3>
+            <button class="btn btn-sm btn-primary" onclick="loadLiveTickets()">🔄 Muat Data</button>
+          </div>
+          <div id="ticket-list" class="scrollable-list">
+            <p class="text-muted">Klik "Muat Data" untuk membaca tiket dari PostgreSQL...</p>
+          </div>
+        </div>
+
+        <div class="card live-box">
+          <div class="box-header">
+            <h3>Katalog Suku Cadang Gudang</h3>
+            <button class="btn btn-sm btn-primary" onclick="loadLiveSpareparts()">🔄 Muat Stok</button>
+          </div>
+          <div id="sparepart-list" class="scrollable-list">
+            <p class="text-muted">Klik "Muat Stok" untuk memeriksa inventaris suku cadang...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Serba Service Center © 2026 | Dokumen dan Implementasi Disiapkan untuk Presentasi Akademik</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

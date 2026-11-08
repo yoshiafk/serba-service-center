@@ -41,14 +41,10 @@ Basis data dinormalisasi hingga **Bentuk Normal Ketiga (3NF)** dengan 14 entitas
      └─ 1 ───  1  [device_handovers]
 ```
 
-> 📖 **Dokumentasi Lengkap Desain Basis Data**:
-> Kunjungi [docs/database-design.md](docs/database-design.md) untuk mempelajari:
-> - Flowchart alur bisnis terperinci (Mermaid)
-> - Narasi operasional menyeluruh
-> - Identifikasi entitas dan justifikasi 3NF
-> - Spesifikasi atribut dan kamus data PostgreSQL
-> - Relasi kardinalitas dan aturan integritas
-> - Entity Relationship Diagram (ERD Mermaid)
+> 📖 **Dokumentasi Lengkap Desain Sistem & Basis Data**:
+> - 📊 [docs/erd-design.md](docs/erd-design.md) — **Perancangan Entity Relationship Diagram (ERD)**: Conceptual, Logical, Physical Data Model, dan kamus data 14 entitas (3NF).
+> - 🎯 [docs/use-case-diagram.md](docs/use-case-diagram.md) — **Perancangan Use Case Diagram**: Identifikasi 5 aktor, diagram batasan sistem, relasi `<<include>>` dan `<<extend>>`, skenario rinci, dan traceability matrix.
+> - ⚡ [docs/database-design.md](docs/database-design.md) — Spesifikasi arsitektur basis data, analisis kesenjangan flowchart PDF, dan DDL PostgreSQL.
 
 ---
 
@@ -90,10 +86,21 @@ Lihat daftar tabel:
 \dt
 ```
 
-### 4. Menjalankan Uji Alur Transaksi Servis (Test Flow)
-Untuk menguji transaksi end-to-end seluruh alur perbaikan (tiket ➜ quotation ➜ sparepart ➜ QC ➜ invoice ➜ payment ➜ garansi ➜ handover):
+### 4. Menjalankan Aplikasi JavaScript (Node.js & Express)
+Aplikasi menyediakan backend RESTful API dan antarmuka web interaktif untuk demonstrasi:
 ```bash
-docker compose exec -T postgres psql -U postgres -d serba_service_db < database/test_flow.sql
+# Instalasi dependensi
+npm install
+
+# Menjalankan server web dashboard & API
+npm start
+```
+Buka browser pada **`http://localhost:3000`** untuk melihat visualisasi ERD, Use Case, dan pengujian API live.
+
+### 5. Menjalankan Simulasi Alur Servis via JavaScript (Demo Flow)
+Untuk mensimulasikan seluruh alur siklus perbaikan dari registrasi hingga penyerahan barang secara terprogram melalui JavaScript:
+```bash
+npm run demo
 ```
 
 ---
@@ -105,14 +112,31 @@ serba-service-center/
 ├── .env.example              # Template variabel lingkungan
 ├── .gitignore                # Berkas konfigurasi git ignore
 ├── docker-compose.yml        # Konfigurasi container service PostgreSQL 16
+├── package.json              # Konfigurasi proyek Node.js & dependensi
 ├── README.md                 # Dokumentasi proyek utama
 ├── database/
 │   ├── init/
 │   │   └── 01_schema.sql     # Skrip DDL PostgreSQL (14 tabel, indeks, & seed)
-│   └── test_flow.sql         # Skrip simulasi transaksi end-to-end
-└── docs/
-    ├── database-design.md    # Dokumentasi spesifikasi basis data komprehensif
-    └── Alur Proses Jasa Perbaikan Barang Elektronik.pdf  # Dokumen acuan alur awal
+│   └── test_flow.sql         # Skrip simulasi SQL transaksional
+├── docs/
+│   ├── erd-design.md         # Perancangan ERD (CDM, LDM, PDM, & Kamus Data)
+│   ├── use-case-diagram.md   # Perancangan Use Case Diagram & Skenario Lengkap
+│   ├── database-design.md    # Dokumentasi spesifikasi basis data komprehensif
+│   └── Alur Proses Jasa Perbaikan Barang Elektronik.pdf
+├── public/                   # Frontend antarmuka web dashboard presentasi
+│   ├── index.html            # Halaman utama visualisasi ERD & Use Case
+│   ├── app.js                # Skrip JavaScript interaktif render diagram & API
+│   └── style.css             # Desain styling antarmuka modern
+├── scripts/
+│   └── demo-flow.js          # Skrip demonstrasi alur servis via JavaScript
+└── src/                      # Source code backend JavaScript (Node.js Express)
+    ├── app.js                # Konfigurasi Express app & middleware
+    ├── server.js             # Bootstrap server & database check
+    ├── config/
+    │   └── db.js             # Konfigurasi koneksi PostgreSQL pool (pg)
+    ├── controllers/          # Logika pemrosesan bisnis (Tickets, QC, Billing, dll.)
+    └── routes/
+        └── api.js            # Definisi endpoint RESTful API
 ```
 
 ---

@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <text x="800" y="35" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">ENTITY RELATIONSHIP DIAGRAM (3NF) - SERBA SERVICE CENTER</text>
+
+  <!-- CUSTOMERS -->
+  <g transform="translate(50, 70)" filter="url(#shadow)">
+    <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="240" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="240" height="6" fill="#2563eb"/>
+    <text x="120" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">CUSTOMERS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  customer_code : varchar(30)</text>
+    <text x="12" y="88" font-size="11" fill="#334155">    name : varchar(100)</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    phone_number : varchar(25)</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    email : varchar(100)</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    address : text</text>
+  </g>
+
+  <!-- DEVICE_CATEGORIES -->
+  <g transform="translate(50, 270)" filter="url(#shadow)">
+    <rect width="240" height="110" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="240" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="240" height="6" fill="#2563eb"/>
+    <text x="120" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">DEVICE_CATEGORIES</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  category_code : varchar(20)</text>
+    <text x="12" y="88" font-size="11" fill="#334155">    name : varchar(100)</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    description : text</text>
+  </g>
+
+  <!-- CUSTOMER_DEVICES -->
+  <g transform="translate(370, 70)" filter="url(#shadow)">
+    <rect width="260" height="180" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">CUSTOMER_DEVICES</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#0284c7">FK  customer_id : bigint</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  category_id : bigint</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    brand : varchar(50)</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    model_name : varchar(100)</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    serial_number : varchar(100)</text>
+    <text x="12" y="160" font-size="11" fill="#334155">    physical_condition : text</text>
+    <text x="12" y="178" font-size="11" fill="#334155">    accessories : text</text>
+  </g>
+
+  <!-- USERS -->
+  <g transform="translate(370, 310)" filter="url(#shadow)">
+    <rect width="260" height="150" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">USERS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  username : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#d97706">UK  email : varchar(100)</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    full_name : varchar(100)</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    role : varchar(30)</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    is_active : boolean</text>
+  </g>
+
+  <!-- SERVICE_TICKETS -->
+  <g transform="translate(710, 70)" filter="url(#shadow)">
+    <rect width="280" height="260" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="2"/>
+    <rect width="280" height="32" rx="6" fill="#1d4ed8"/>
+    <rect y="26" width="280" height="6" fill="#1d4ed8"/>
+    <text x="140" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">SERVICE_TICKETS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  ticket_number : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  customer_device_id : bigint</text>
+    <text x="12" y="106" font-size="11" font-weight="700" fill="#0284c7">FK  customer_id : bigint</text>
+    <text x="12" y="124" font-size="11" font-weight="700" fill="#0284c7">FK  cs_id : bigint</text>
+    <text x="12" y="142" font-size="11" font-weight="700" fill="#0284c7">FK  technician_id : bigint</text>
+    <text x="12" y="160" font-size="11" fill="#334155">    initial_complaint : text</text>
+    <text x="12" y="178" font-size="11" fill="#334155">    inspection_result : text</text>
+    <text x="12" y="196" font-size="11" fill="#334155">    is_repairable : boolean</text>
+    <text x="12" y="214" font-size="11" fill="#334155">    status : varchar(30)</text>
+    <text x="12" y="232" font-size="11" fill="#334155">    labor_cost : numeric(12,2)</text>
+    <text x="12" y="250" font-size="11" fill="#334155">    entry_date : timestamptz</text>
+  </g>
+
+  <!-- SERVICE_QUOTATIONS -->
+  <g transform="translate(1080, 70)" filter="url(#shadow)">
+    <rect width="260" height="160" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">SERVICE_QUOTATIONS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  quotation_number : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  service_ticket_id : bigint</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    estimated_labor_cost : numeric</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    estimated_part_cost : numeric</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    total_estimated_cost : numeric</text>
+    <text x="12" y="160" font-size="11" fill="#334155">    approval_status : varchar(20)</text>
+  </g>
+
+  <!-- SPAREPARTS -->
+  <g transform="translate(1380, 290)" filter="url(#shadow)">
+    <rect width="200" height="150" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="200" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="200" height="6" fill="#2563eb"/>
+    <text x="100" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">SPAREPARTS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  part_code : varchar(50)</text>
+    <text x="12" y="88" font-size="11" fill="#334155">    name : varchar(150)</text>
+    <text x="12" y="106" font-size="11" font-weight="700" fill="#0284c7">FK  category_id : bigint</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    unit_price : numeric</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    stock_quantity : int</text>
+  </g>
+
+  <!-- SERVICE_SPAREPARTS -->
+  <g transform="translate(1080, 290)" filter="url(#shadow)">
+    <rect width="260" height="150" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">SERVICE_SPAREPARTS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#0284c7">FK  service_ticket_id : bigint</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  sparepart_id : bigint</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    quantity : int</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    unit_price : numeric</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    subtotal : numeric</text>
+  </g>
+
+  <!-- INVOICES -->
+  <g transform="translate(710, 420)" filter="url(#shadow)">
+    <rect width="280" height="170" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="280" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="280" height="6" fill="#2563eb"/>
+    <text x="140" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">INVOICES</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  invoice_number : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  service_ticket_id : bigint [UK]</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    total_labor_cost : numeric</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    total_sparepart_cost : numeric</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    grand_total : numeric</text>
+    <text x="12" y="160" font-size="11" fill="#334155">    payment_status : varchar(20)</text>
+  </g>
+
+  <!-- PAYMENTS -->
+  <g transform="translate(710, 670)" filter="url(#shadow)">
+    <rect width="280" height="150" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="280" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="280" height="6" fill="#2563eb"/>
+    <text x="140" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">PAYMENTS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  payment_number : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  invoice_id : bigint</text>
+    <text x="12" y="106" font-size="11" font-weight="700" fill="#0284c7">FK  cashier_id : bigint</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    payment_method : varchar(30)</text>
+    <text x="12" y="142" font-size="11" fill="#334155">    amount_paid : numeric</text>
+  </g>
+
+  <!-- SERVICE_QC_TESTS -->
+  <g transform="translate(1080, 500)" filter="url(#shadow)">
+    <rect width="260" height="130" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">SERVICE_QC_TESTS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#0284c7">FK  service_ticket_id : bigint</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  tested_by_user_id : bigint</text>
+    <text x="12" y="106" font-size="11" fill="#334155">    checklist_results : jsonb</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    is_passed : boolean</text>
+  </g>
+
+  <!-- SERVICE_WARRANTIES -->
+  <g transform="translate(370, 540)" filter="url(#shadow)">
+    <rect width="260" height="140" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">SERVICE_WARRANTIES</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  warranty_code : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  service_ticket_id : bigint</text>
+    <text x="12" y="106" font-size="11" font-weight="700" fill="#0284c7">FK  invoice_id : bigint</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    labor_expiry_date : date</text>
+  </g>
+
+  <!-- DEVICE_HANDOVERS -->
+  <g transform="translate(370, 740)" filter="url(#shadow)">
+    <rect width="260" height="140" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+    <rect width="260" height="32" rx="6" fill="#2563eb"/>
+    <rect y="26" width="260" height="6" fill="#2563eb"/>
+    <text x="130" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">DEVICE_HANDOVERS</text>
+    <text x="12" y="52" font-size="11" font-weight="700" fill="#2563eb">PK  id : bigint</text>
+    <text x="12" y="70" font-size="11" font-weight="700" fill="#d97706">UK  handover_number : varchar(50)</text>
+    <text x="12" y="88" font-size="11" font-weight="700" fill="#0284c7">FK  service_ticket_id : bigint [UK]</text>
+    <text x="12" y="106" font-size="11" font-weight="700" fill="#0284c7">FK  handed_by_user_id : bigint</text>
+    <text x="12" y="124" font-size="11" fill="#334155">    received_by_name : varchar(100)</text>
+  </g>
+
+  <!-- Relasi Garis Penghubung -->
+  <path d="M 290 145 L 370 145" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 290 325 L 370 200" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 630 150 L 710 150" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 990 140 L 1080 140" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 990 230 L 1080 340" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 1340 365 L 1380 365" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 990 270 L 1080 540" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 850 330 L 850 420" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 850 590 L 850 670" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 710 500 L 630 580" stroke="#475569" stroke-width="1.5" fill="none"/>
+  <path d="M 710 280 L 630 780" stroke="#475569" stroke-width="1.5" fill="none"/>
+</svg>

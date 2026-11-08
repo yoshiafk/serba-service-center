@@ -1,0 +1,187 @@
+// ==============================================================================
+// DBML: Serba Service Center
+// Database Markup Language untuk dbdiagram.io / visualizer
+// ==============================================================================
+
+Table users {
+  id bigint [pk, increment]
+  username varchar(50) [unique, not null]
+  email varchar(100) [unique, not null]
+  password_hash varchar(255) [not null]
+  full_name varchar(100) [not null]
+  phone_number varchar(20)
+  role varchar(30) [not null, note: 'ADMIN, CS, TECHNICIAN, CASHIER, SUPERVISOR']
+  is_active boolean [default: true, not null]
+  created_at timestamptz [default: `now()`, not null]
+  updated_at timestamptz [default: `now()`, not null]
+}
+
+Table customers {
+  id bigint [pk, increment]
+  customer_code varchar(30) [unique, not null]
+  name varchar(100) [not null]
+  phone_number varchar(25) [not null]
+  email varchar(100)
+  address text
+  created_at timestamptz [default: `now()`, not null]
+  updated_at timestamptz [default: `now()`, not null]
+}
+
+Table device_categories {
+  id bigint [pk, increment]
+  category_code varchar(20) [unique, not null]
+  name varchar(100) [not null]
+  description text
+  created_at timestamptz [default: `now()`, not null]
+}
+
+Table customer_devices {
+  id bigint [pk, increment]
+  customer_id bigint [not null, ref: > customers.id]
+  category_id bigint [not null, ref: > device_categories.id]
+  brand varchar(50) [not null]
+  model_name varchar(100) [not null]
+  serial_number varchar(100)
+  color varchar(30)
+  physical_condition text
+  accessories text
+  created_at timestamptz [default: `now()`, not null]
+  updated_at timestamptz [default: `now()`, not null]
+}
+
+Table service_tickets {
+  id bigint [pk, increment]
+  ticket_number varchar(50) [unique, not null]
+  customer_device_id bigint [not null, ref: > customer_devices.id]
+  customer_id bigint [not null, ref: > customers.id]
+  cs_id bigint [not null, ref: > users.id]
+  technician_id bigint [ref: > users.id]
+  initial_complaint text [not null]
+  inspection_result text
+  is_repairable boolean
+  unrepairable_reason text
+  status varchar(30) [default: 'REGISTERED', not null]
+  labor_cost numeric(12,2) [default: 0.00, not null]
+  entry_date timestamptz [default: `now()`, not null]
+  inspected_at timestamptz
+  repaired_at timestamptz
+  completed_at timestamptz
+  created_at timestamptz [default: `now()`, not null]
+  updated_at timestamptz [default: `now()`, not null]
+}
+
+Table service_quotations {
+  id bigint [pk, increment]
+  quotation_number varchar(50) [unique, not null]
+  service_ticket_id bigint [not null, ref: > service_tickets.id]
+  estimated_labor_cost numeric(12,2) [default: 0.00, not null]
+  estimated_part_cost numeric(12,2) [default: 0.00, not null]
+  total_estimated_cost numeric(12,2) [not null]
+  notes text
+  approval_status varchar(20) [default: 'PENDING', not null]
+  rejection_reason text
+  responded_at timestamptz
+  created_at timestamptz [default: `now()`, not null]
+}
+
+Table spareparts {
+  id bigint [pk, increment]
+  part_code varchar(50) [unique, not null]
+  name varchar(150) [not null]
+  category_id bigint [ref: > device_categories.id]
+  unit_price numeric(12,2) [not null]
+  cost_price numeric(12,2) [not null]
+  stock_quantity int [default: 0, not null]
+  min_stock_alert int [default: 2, not null]
+  unit_of_measure varchar(20) [default: 'pcs', not null]
+  created_at timestamptz [default: `now()`, not null]
+  updated_at timestamptz [default: `now()`, not null]
+}
+
+Table service_spareparts {
+  id bigint [pk, increment]
+  service_ticket_id bigint [not null, ref: > service_tickets.id]
+  sparepart_id bigint [not null, ref: > spareparts.id]
+  quantity int [not null]
+  unit_price numeric(12,2) [not null]
+  subtotal numeric(12,2) [not null]
+  usage_status varchar(20) [default: 'INSTALLED', not null]
+  notes varchar(255)
+  created_at timestamptz [default: `now()`, not null]
+}
+
+Table service_status_history {
+  id bigint [pk, increment]
+  service_ticket_id bigint [not null, ref: > service_tickets.id]
+  old_status varchar(30)
+  new_status varchar(30) [not null]
+  changed_by_user_id bigint [not null, ref: > users.id]
+  notes text
+  created_at timestamptz [default: `now()`, not null]
+}
+
+Table service_qc_tests {
+  id bigint [pk, increment]
+  service_ticket_id bigint [not null, ref: > service_tickets.id]
+  tested_by_user_id bigint [not null, ref: > users.id]
+  checklist_results jsonb [not null]
+  is_passed boolean [not null]
+  notes text
+  tested_at timestamptz [default: `now()`, not null]
+}
+
+Table invoices {
+  id bigint [pk, increment]
+  invoice_number varchar(50) [unique, not null]
+  service_ticket_id bigint [unique, not null, ref: - service_tickets.id]
+  total_labor_cost numeric(12,2) [default: 0.00, not null]
+  total_sparepart_cost numeric(12,2) [default: 0.00, not null]
+  discount_amount numeric(12,2) [default: 0.00, not null]
+  tax_amount numeric(12,2) [default: 0.00, not null]
+  grand_total numeric(12,2) [not null]
+  amount_paid numeric(12,2) [default: 0.00, not null]
+  balance_due numeric(12,2) [not null]
+  payment_status varchar(20) [default: 'UNPAID', not null]
+  created_at timestamptz [default: `now()`, not null]
+  updated_at timestamptz [default: `now()`, not null]
+}
+
+Table payments {
+  id bigint [pk, increment]
+  payment_number varchar(50) [unique, not null]
+  invoice_id bigint [not null, ref: > invoices.id]
+  cashier_id bigint [not null, ref: > users.id]
+  payment_type varchar(20) [not null]
+  payment_method varchar(30) [not null]
+  amount_paid numeric(12,2) [not null]
+  reference_number varchar(100)
+  paid_at timestamptz [default: `now()`, not null]
+  notes text
+}
+
+Table service_warranties {
+  id bigint [pk, increment]
+  warranty_code varchar(50) [unique, not null]
+  service_ticket_id bigint [not null, ref: > service_tickets.id]
+  invoice_id bigint [not null, ref: > invoices.id]
+  labor_warranty_days int [default: 30, not null]
+  part_warranty_days int [default: 90, not null]
+  start_date date [not null]
+  labor_expiry_date date [not null]
+  part_expiry_date date [not null]
+  status varchar(20) [default: 'ACTIVE', not null]
+  terms_and_conditions text
+  created_at timestamptz [default: `now()`, not null]
+}
+
+Table device_handovers {
+  id bigint [pk, increment]
+  handover_number varchar(50) [unique, not null]
+  service_ticket_id bigint [unique, not null, ref: - service_tickets.id]
+  handed_by_user_id bigint [not null, ref: > users.id]
+  received_by_name varchar(100) [not null]
+  receiver_phone varchar(25)
+  handover_type varchar(30) [not null]
+  handover_date timestamptz [default: `now()`, not null]
+  notes text
+}

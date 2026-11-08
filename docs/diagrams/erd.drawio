@@ -1,0 +1,128 @@
+<mxfile host="app.diagrams.net" modified="2026-11-08T07:57:00.000Z" agent="Mozilla/5.0" version="21.0.0" type="device">
+  <diagram id="erd-diagram" name="ERD - Serba Service Center">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Table: CUSTOMERS -->
+        <mxCell id="tbl_customers" value="&lt;b&gt;CUSTOMERS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c_1" value="+ id: bigint [PK]&#xa;+ customer_code: varchar(30) [UK]&#xa;+ name: varchar(100)&#xa;+ phone_number: varchar(25)&#xa;+ email: varchar(100)&#xa;+ address: text" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_customers">
+          <mxGeometry y="26" width="220" height="124" as="geometry" />
+        </mxCell>
+
+        <!-- Table: DEVICE_CATEGORIES -->
+        <mxCell id="tbl_categories" value="&lt;b&gt;DEVICE_CATEGORIES&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="40" y="320" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cat_1" value="+ id: bigint [PK]&#xa;+ category_code: varchar(20) [UK]&#xa;+ name: varchar(100)&#xa;+ description: text" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_categories">
+          <mxGeometry y="26" width="220" height="84" as="geometry" />
+        </mxCell>
+
+        <!-- Table: CUSTOMER_DEVICES -->
+        <mxCell id="tbl_devices" value="&lt;b&gt;CUSTOMER_DEVICES&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="360" y="80" width="230" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="d_1" value="+ id: bigint [PK]&#xa;* customer_id: bigint [FK]&#xa;* category_id: bigint [FK]&#xa;+ brand: varchar(50)&#xa;+ model_name: varchar(100)&#xa;+ serial_number: varchar(100)&#xa;+ physical_condition: text&#xa;+ accessories: text" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_devices">
+          <mxGeometry y="26" width="230" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- Table: USERS -->
+        <mxCell id="tbl_users" value="&lt;b&gt;USERS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="360" y="320" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="u_1" value="+ id: bigint [PK]&#xa;+ username: varchar(50) [UK]&#xa;+ email: varchar(100) [UK]&#xa;+ full_name: varchar(100)&#xa;+ role: varchar(30)&#xa;+ is_active: boolean" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_users">
+          <mxGeometry y="26" width="230" height="124" as="geometry" />
+        </mxCell>
+
+        <!-- Table: SERVICE_TICKETS -->
+        <mxCell id="tbl_tickets" value="&lt;b&gt;SERVICE_TICKETS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#1E40AF;fontColor=#ffffff;strokeColor=#1E3A8A;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="700" y="80" width="250" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="t_1" value="+ id: bigint [PK]&#xa;+ ticket_number: varchar(50) [UK]&#xa;* customer_device_id: bigint [FK]&#xa;* customer_id: bigint [FK]&#xa;* cs_id: bigint [FK]&#xa;* technician_id: bigint [FK]&#xa;+ initial_complaint: text&#xa;+ inspection_result: text&#xa;+ is_repairable: boolean&#xa;+ status: varchar(30)&#xa;+ labor_cost: numeric(12,2)&#xa;+ entry_date: timestamptz" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_tickets">
+          <mxGeometry y="26" width="250" height="214" as="geometry" />
+        </mxCell>
+
+        <!-- Table: SERVICE_QUOTATIONS -->
+        <mxCell id="tbl_quotes" value="&lt;b&gt;SERVICE_QUOTATIONS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="80" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="q_1" value="+ id: bigint [PK]&#xa;+ quotation_number: varchar(50) [UK]&#xa;* service_ticket_id: bigint [FK]&#xa;+ estimated_labor_cost: numeric&#xa;+ estimated_part_cost: numeric&#xa;+ total_estimated_cost: numeric&#xa;+ approval_status: varchar(20)" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_quotes">
+          <mxGeometry y="26" width="240" height="124" as="geometry" />
+        </mxCell>
+
+        <!-- Table: SPAREPARTS -->
+        <mxCell id="tbl_spareparts" value="&lt;b&gt;SPAREPARTS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="320" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="sp_1" value="+ id: bigint [PK]&#xa;+ part_code: varchar(50) [UK]&#xa;+ name: varchar(150)&#xa;* category_id: bigint [FK]&#xa;+ unit_price: numeric(12,2)&#xa;+ stock_quantity: int&#xa;+ min_stock_alert: int" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_spareparts">
+          <mxGeometry y="26" width="220" height="124" as="geometry" />
+        </mxCell>
+
+        <!-- Table: SERVICE_SPAREPARTS -->
+        <mxCell id="tbl_srv_spareparts" value="&lt;b&gt;SERVICE_SPAREPARTS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="320" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ssp_1" value="+ id: bigint [PK]&#xa;* service_ticket_id: bigint [FK]&#xa;* sparepart_id: bigint [FK]&#xa;+ quantity: int&#xa;+ unit_price: numeric(12,2)&#xa;+ subtotal: numeric(12,2)" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_srv_spareparts">
+          <mxGeometry y="26" width="240" height="114" as="geometry" />
+        </mxCell>
+
+        <!-- Table: SERVICE_QC_TESTS -->
+        <mxCell id="tbl_qc" value="&lt;b&gt;SERVICE_QC_TESTS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="520" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="qc_1" value="+ id: bigint [PK]&#xa;* service_ticket_id: bigint [FK]&#xa;* tested_by_user_id: bigint [FK]&#xa;+ checklist_results: jsonb&#xa;+ is_passed: boolean" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_qc">
+          <mxGeometry y="26" width="240" height="104" as="geometry" />
+        </mxCell>
+
+        <!-- Table: INVOICES -->
+        <mxCell id="tbl_invoices" value="&lt;b&gt;INVOICES&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="700" y="420" width="250" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="inv_1" value="+ id: bigint [PK]&#xa;+ invoice_number: varchar(50) [UK]&#xa;* service_ticket_id: bigint [FK, UK]&#xa;+ total_labor_cost: numeric&#xa;+ total_sparepart_cost: numeric&#xa;+ grand_total: numeric&#xa;+ amount_paid: numeric&#xa;+ payment_status: varchar(20)" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_invoices">
+          <mxGeometry y="26" width="250" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- Table: PAYMENTS -->
+        <mxCell id="tbl_payments" value="&lt;b&gt;PAYMENTS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="700" y="680" width="250" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="pay_1" value="+ id: bigint [PK]&#xa;+ payment_number: varchar(50) [UK]&#xa;* invoice_id: bigint [FK]&#xa;* cashier_id: bigint [FK]&#xa;+ payment_type: varchar(20)&#xa;+ payment_method: varchar(30)&#xa;+ amount_paid: numeric" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_payments">
+          <mxGeometry y="26" width="250" height="124" as="geometry" />
+        </mxCell>
+
+        <!-- Table: SERVICE_WARRANTIES -->
+        <mxCell id="tbl_warranties" value="&lt;b&gt;SERVICE_WARRANTIES&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="360" y="560" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="wrn_1" value="+ id: bigint [PK]&#xa;+ warranty_code: varchar(50) [UK]&#xa;* service_ticket_id: bigint [FK]&#xa;* invoice_id: bigint [FK]&#xa;+ labor_warranty_days: int&#xa;+ start_date: date&#xa;+ status: varchar(20)" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_warranties">
+          <mxGeometry y="26" width="230" height="124" as="geometry" />
+        </mxCell>
+
+        <!-- Table: DEVICE_HANDOVERS -->
+        <mxCell id="tbl_handovers" value="&lt;b&gt;DEVICE_HANDOVERS&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#2563EB;fontColor=#ffffff;strokeColor=#1D4ED8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="360" y="780" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="hnd_1" value="+ id: bigint [PK]&#xa;+ handover_number: varchar(50) [UK]&#xa;* service_ticket_id: bigint [FK, UK]&#xa;* handed_by_user_id: bigint [FK]&#xa;+ received_by_name: varchar(100)&#xa;+ handover_type: varchar(30)" style="text;strokeColor=none;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tbl_handovers">
+          <mxGeometry y="26" width="230" height="114" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships Connectors (Crow's Foot) -->
+        <mxCell id="rel_cust_dev" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_customers" target="tbl_devices"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_cat_dev" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_categories" target="tbl_devices"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_dev_ticket" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_devices" target="tbl_tickets"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_ticket_quote" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_tickets" target="tbl_quotes"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_ticket_parts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_tickets" target="tbl_srv_spareparts"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_spare_ssp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_spareparts" target="tbl_srv_spareparts"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_ticket_qc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_tickets" target="tbl_qc"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_ticket_inv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERone;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_tickets" target="tbl_invoices"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_inv_pay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_invoices" target="tbl_payments"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_ticket_wrn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERone;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_tickets" target="tbl_warranties"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel_ticket_hnd" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERone;startArrow=ERone;strokeColor=#334155;strokeWidth=1.5;" edge="1" parent="1" source="tbl_tickets" target="tbl_handovers"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

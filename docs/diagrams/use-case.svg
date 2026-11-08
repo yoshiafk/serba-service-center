@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="100%" height="100%" style="background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">USE CASE DIAGRAM - SERBA SERVICE CENTER</text>
+
+  <!-- System Boundary -->
+  <rect x="240" y="60" width="720" height="800" rx="12" fill="#f8fafc" stroke="#2563eb" stroke-width="2.5" />
+  <rect x="240" y="60" width="720" height="38" rx="12" fill="#2563eb" />
+  <rect x="240" y="86" width="720" height="12" fill="#2563eb" />
+  <text x="600" y="85" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Sistem Informasi Serba Service Center (Boundary)</text>
+
+  <!-- Left Actors -->
+  <!-- Actor: Pelanggan -->
+  <g transform="translate(100, 200)">
+    <circle cx="20" cy="20" r="16" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="36" x2="20" y2="70" stroke="#0f172a" stroke-width="2"/>
+    <line x1="-5" y1="50" x2="45" y2="50" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="0" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="40" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Pelanggan</text>
+    <text x="20" y="142" text-anchor="middle" font-size="11" fill="#64748b">(Customer)</text>
+  </g>
+
+  <!-- Actor: CS -->
+  <g transform="translate(100, 520)">
+    <circle cx="20" cy="20" r="16" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="36" x2="20" y2="70" stroke="#0f172a" stroke-width="2"/>
+    <line x1="-5" y1="50" x2="45" y2="50" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="0" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="40" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Customer Service</text>
+    <text x="20" y="142" text-anchor="middle" font-size="11" fill="#64748b">(CS / Loket)</text>
+  </g>
+
+  <!-- Right Actors -->
+  <!-- Actor: Teknisi -->
+  <g transform="translate(1040, 180)">
+    <circle cx="20" cy="20" r="16" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="36" x2="20" y2="70" stroke="#0f172a" stroke-width="2"/>
+    <line x1="-5" y1="50" x2="45" y2="50" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="0" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="40" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Teknisi</text>
+    <text x="20" y="142" text-anchor="middle" font-size="11" fill="#64748b">(Technician)</text>
+  </g>
+
+  <!-- Actor: Kasir -->
+  <g transform="translate(1040, 480)">
+    <circle cx="20" cy="20" r="16" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="36" x2="20" y2="70" stroke="#0f172a" stroke-width="2"/>
+    <line x1="-5" y1="50" x2="45" y2="50" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="0" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="40" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Kasir</text>
+    <text x="20" y="142" text-anchor="middle" font-size="11" fill="#64748b">(Cashier)</text>
+  </g>
+
+  <!-- Actor: Admin -->
+  <g transform="translate(1040, 700)">
+    <circle cx="20" cy="20" r="16" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="36" x2="20" y2="70" stroke="#0f172a" stroke-width="2"/>
+    <line x1="-5" y1="50" x2="45" y2="50" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="0" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="40" y2="105" stroke="#0f172a" stroke-width="2"/>
+    <text x="20" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Administrator</text>
+    <text x="20" y="142" text-anchor="middle" font-size="11" fill="#64748b">(Supervisor)</text>
+  </g>
+
+  <!-- Association Lines -->
+  <!-- Cust associations -->
+  <line x1="145" y1="230" x2="280" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="145" y1="240" x2="280" y2="285" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="145" y1="260" x2="280" y2="575" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="145" y1="270" x2="280" y2="720" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- CS associations -->
+  <line x1="145" y1="540" x2="280" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="145" y1="550" x2="280" y2="285" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="145" y1="570" x2="280" y2="720" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Tech associations -->
+  <line x1="1040" y1="220" x2="920" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="1040" y1="230" x2="920" y2="360" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="1040" y1="240" x2="720" y2="380" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="1040" y1="250" x2="920" y2="500" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Cashier associations -->
+  <line x1="1040" y1="520" x2="720" y2="535" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="1040" y1="535" x2="480" y2="575" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Admin associations -->
+  <line x1="1040" y1="740" x2="920" y2="795" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="1040" y1="750" x2="720" y2="795" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Use Case Ovals -->
+  <!-- UC-01 -->
+  <g transform="translate(280, 115)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-01: Registrasi Pelanggan</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">&amp; Perangkat</text>
+  </g>
+
+  <!-- UC-02 -->
+  <g transform="translate(520, 115)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-02: Penerbitan Tiket</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">Servis</text>
+  </g>
+
+  <!-- UC-03 -->
+  <g transform="translate(720, 190)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-03: Diagnosis Kerusakan</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">Perangkat</text>
+  </g>
+
+  <!-- UC-04 -->
+  <g transform="translate(520, 260)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-04: Penyusunan Estimasi</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">Biaya (Quotation)</text>
+  </g>
+
+  <!-- UC-05 -->
+  <g transform="translate(280, 260)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-05: Konfirmasi Persetujuan</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">Estimasi Biaya</text>
+  </g>
+
+  <!-- UC-06 -->
+  <g transform="translate(720, 335)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-06: Pelaksanaan Reparasi</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">Fisik</text>
+  </g>
+
+  <!-- UC-07 -->
+  <g transform="translate(520, 355)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-07: Alokasi Suku Cadang</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">(Sparepart)</text>
+  </g>
+
+  <!-- UC-08 -->
+  <g transform="translate(280, 375)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">UC-08: Pemesanan Suku</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#92400e">Cadang Indent</text>
+  </g>
+
+  <!-- UC-09 -->
+  <g transform="translate(720, 475)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-09: Pengujian Kendali Mutu</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">(QC Testing)</text>
+  </g>
+
+  <!-- UC-10 -->
+  <g transform="translate(520, 510)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-10: Penerbitan Faktur</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">(Invoice)</text>
+  </g>
+
+  <!-- UC-11 -->
+  <g transform="translate(280, 550)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-11: Proses Pembayaran</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">(DP &amp; Pelunasan)</text>
+  </g>
+
+  <!-- UC-12 -->
+  <g transform="translate(520, 640)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-12: Aktivasi Garansi</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">Purna Jual</text>
+  </g>
+
+  <!-- UC-13 -->
+  <g transform="translate(280, 695)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">UC-13: Serah Terima Perangkat</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#1e40af">(Handover)</text>
+  </g>
+
+  <!-- UC-14 -->
+  <g transform="translate(520, 770)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">UC-14: Pelacakan Histori</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#334155">Status Servis (Audit)</text>
+  </g>
+
+  <!-- UC-15 -->
+  <g transform="translate(720, 770)" filter="url(#shadow)">
+    <ellipse cx="100" cy="25" rx="100" ry="25" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="100" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">UC-15: Pengelolaan Master</text>
+    <text x="100" y="36" text-anchor="middle" font-size="10" fill="#334155">Data &amp; Inventaris</text>
+  </g>
+
+  <!-- <<include>> Arrows -->
+  <path d="M 480 140 L 520 140" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="500" y="133" text-anchor="middle" font-size="9" fill="#475569">&lt;&lt;include&gt;&gt;</text>
+
+  <path d="M 720 215 L 680 260" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="710" y="245" text-anchor="middle" font-size="9" fill="#475569">&lt;&lt;include&gt;&gt;</text>
+
+  <path d="M 820 385 L 820 475" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="855" y="430" text-anchor="middle" font-size="9" fill="#475569">&lt;&lt;include&gt;&gt;</text>
+
+  <path d="M 720 500 L 700 520" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="725" y="525" text-anchor="middle" font-size="9" fill="#475569">&lt;&lt;include&gt;&gt;</text>
+
+  <path d="M 480 575 L 540 640" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="525" y="605" text-anchor="middle" font-size="9" fill="#475569">&lt;&lt;include&gt;&gt;</text>
+
+  <path d="M 540 685 L 480 720" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="500" y="715" text-anchor="middle" font-size="9" fill="#475569">&lt;&lt;include&gt;&gt;</text>
+
+  <!-- <<extend>> Arrow -->
+  <path d="M 480 400 L 520 380" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="500" y="375" text-anchor="middle" font-size="9" fill="#b45309">&lt;&lt;extend&gt;&gt;</text>
+
+</svg>

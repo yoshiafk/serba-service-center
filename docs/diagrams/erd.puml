@@ -1,0 +1,230 @@
+@startuml Serba_Service_Center_ERD
+!theme plain
+skinparam linetype ortho
+skinparam roundcorner 5
+
+entity "users" as users {
+  * id : bigint <<generated, PK>>
+  --
+  * username : varchar(50) <<UK>>
+  * email : varchar(100) <<UK>>
+  * password_hash : varchar(255)
+  * full_name : varchar(100)
+  phone_number : varchar(20)
+  * role : varchar(30)
+  * is_active : boolean
+  * created_at : timestamptz
+  * updated_at : timestamptz
+}
+
+entity "customers" as customers {
+  * id : bigint <<generated, PK>>
+  --
+  * customer_code : varchar(30) <<UK>>
+  * name : varchar(100)
+  * phone_number : varchar(25)
+  email : varchar(100)
+  address : text
+  * created_at : timestamptz
+  * updated_at : timestamptz
+}
+
+entity "device_categories" as categories {
+  * id : bigint <<generated, PK>>
+  --
+  * category_code : varchar(20) <<UK>>
+  * name : varchar(100)
+  description : text
+  * created_at : timestamptz
+}
+
+entity "customer_devices" as devices {
+  * id : bigint <<generated, PK>>
+  --
+  * customer_id : bigint <<FK>>
+  * category_id : bigint <<FK>>
+  * brand : varchar(50)
+  * model_name : varchar(100)
+  serial_number : varchar(100)
+  color : varchar(30)
+  physical_condition : text
+  accessories : text
+  * created_at : timestamptz
+  * updated_at : timestamptz
+}
+
+entity "service_tickets" as tickets {
+  * id : bigint <<generated, PK>>
+  --
+  * ticket_number : varchar(50) <<UK>>
+  * customer_device_id : bigint <<FK>>
+  * customer_id : bigint <<FK>>
+  * cs_id : bigint <<FK>>
+  technician_id : bigint <<FK>>
+  * initial_complaint : text
+  inspection_result : text
+  is_repairable : boolean
+  unrepairable_reason : text
+  * status : varchar(30)
+  * labor_cost : numeric(12,2)
+  * entry_date : timestamptz
+  inspected_at : timestamptz
+  repaired_at : timestamptz
+  completed_at : timestamptz
+  * created_at : timestamptz
+  * updated_at : timestamptz
+}
+
+entity "service_quotations" as quotations {
+  * id : bigint <<generated, PK>>
+  --
+  * quotation_number : varchar(50) <<UK>>
+  * service_ticket_id : bigint <<FK>>
+  * estimated_labor_cost : numeric(12,2)
+  * estimated_part_cost : numeric(12,2)
+  * total_estimated_cost : numeric(12,2)
+  notes : text
+  * approval_status : varchar(20)
+  rejection_reason : text
+  responded_at : timestamptz
+  * created_at : timestamptz
+}
+
+entity "spareparts" as spareparts {
+  * id : bigint <<generated, PK>>
+  --
+  * part_code : varchar(50) <<UK>>
+  * name : varchar(150)
+  category_id : bigint <<FK>>
+  * unit_price : numeric(12,2)
+  * cost_price : numeric(12,2)
+  * stock_quantity : int
+  * min_stock_alert : int
+  * unit_of_measure : varchar(20)
+  * created_at : timestamptz
+  * updated_at : timestamptz
+}
+
+entity "service_spareparts" as service_spareparts {
+  * id : bigint <<generated, PK>>
+  --
+  * service_ticket_id : bigint <<FK>>
+  * sparepart_id : bigint <<FK>>
+  * quantity : int
+  * unit_price : numeric(12,2)
+  * subtotal : numeric(12,2)
+  * usage_status : varchar(20)
+  notes : varchar(255)
+  * created_at : timestamptz
+}
+
+entity "service_status_history" as history {
+  * id : bigint <<generated, PK>>
+  --
+  * service_ticket_id : bigint <<FK>>
+  old_status : varchar(30)
+  * new_status : varchar(30)
+  * changed_by_user_id : bigint <<FK>>
+  notes : text
+  * created_at : timestamptz
+}
+
+entity "service_qc_tests" as qc {
+  * id : bigint <<generated, PK>>
+  --
+  * service_ticket_id : bigint <<FK>>
+  * tested_by_user_id : bigint <<FK>>
+  * checklist_results : jsonb
+  * is_passed : boolean
+  notes : text
+  * tested_at : timestamptz
+}
+
+entity "invoices" as invoices {
+  * id : bigint <<generated, PK>>
+  --
+  * invoice_number : varchar(50) <<UK>>
+  * service_ticket_id : bigint <<FK, UK>>
+  * total_labor_cost : numeric(12,2)
+  * total_sparepart_cost : numeric(12,2)
+  * discount_amount : numeric(12,2)
+  * tax_amount : numeric(12,2)
+  * grand_total : numeric(12,2)
+  * amount_paid : numeric(12,2)
+  * balance_due : numeric(12,2)
+  * payment_status : varchar(20)
+  * created_at : timestamptz
+  * updated_at : timestamptz
+}
+
+entity "payments" as payments {
+  * id : bigint <<generated, PK>>
+  --
+  * payment_number : varchar(50) <<UK>>
+  * invoice_id : bigint <<FK>>
+  * cashier_id : bigint <<FK>>
+  * payment_type : varchar(20)
+  * payment_method : varchar(30)
+  * amount_paid : numeric(12,2)
+  reference_number : varchar(100)
+  * paid_at : timestamptz
+  notes : text
+}
+
+entity "service_warranties" as warranties {
+  * id : bigint <<generated, PK>>
+  --
+  * warranty_code : varchar(50) <<UK>>
+  * service_ticket_id : bigint <<FK>>
+  * invoice_id : bigint <<FK>>
+  * labor_warranty_days : int
+  * part_warranty_days : int
+  * start_date : date
+  * labor_expiry_date : date
+  * part_expiry_date : date
+  * status : varchar(20)
+  terms_and_conditions : text
+  * created_at : timestamptz
+}
+
+entity "device_handovers" as handovers {
+  * id : bigint <<generated, PK>>
+  --
+  * handover_number : varchar(50) <<UK>>
+  * service_ticket_id : bigint <<FK, UK>>
+  * handed_by_user_id : bigint <<FK>>
+  * received_by_name : varchar(100)
+  receiver_phone : varchar(25)
+  * handover_type : varchar(30)
+  * handover_date : timestamptz
+  notes : text
+}
+
+' Relasi Antar Entitas
+customers ||--o{ devices : "owns"
+categories ||--o{ devices : "categorizes"
+categories ||--o{ spareparts : "filters"
+devices ||--o{ tickets : "is_serviced_in"
+customers ||--o{ tickets : "requests"
+users ||--o{ tickets : "registered_by (CS)"
+users ||--o{ tickets : "assigned_to (Technician)"
+
+tickets ||--o{ quotations : "estimates_with"
+tickets ||--o{ history : "tracks_timeline"
+users ||--o{ history : "changed_by"
+
+tickets ||--o{ service_spareparts : "consumes"
+spareparts ||--o{ service_spareparts : "supplied_to"
+
+tickets ||--o{ qc : "verified_in"
+users ||--o{ qc : "tested_by"
+
+tickets ||--|| invoices : "billed_as"
+invoices ||--o{ payments : "paid_with"
+users ||--o{ payments : "received_by (Cashier)"
+
+tickets ||--o| warranties : "guaranteed_by"
+tickets ||--|| handovers : "released_via"
+users ||--o{ handovers : "handed_by"
+
+@enduml

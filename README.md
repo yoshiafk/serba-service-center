@@ -45,6 +45,22 @@ Basis data dinormalisasi hingga **Bentuk Normal Ketiga (3NF)** dengan 14 entitas
 > - 📊 [docs/erd-design.md](docs/erd-design.md) — **Perancangan Entity Relationship Diagram (ERD)**: Conceptual, Logical, Physical Data Model, dan kamus data 14 entitas (3NF).
 > - 🎯 [docs/use-case-diagram.md](docs/use-case-diagram.md) — **Perancangan Use Case Diagram**: Identifikasi 5 aktor, diagram batasan sistem, relasi `<<include>>` dan `<<extend>>`, skenario rinci, dan traceability matrix.
 > - ⚡ [docs/database-design.md](docs/database-design.md) — Spesifikasi arsitektur basis data, analisis kesenjangan flowchart PDF, dan DDL PostgreSQL.
+>
+> 📂 **Berkas Diagram Asli (Non-Markdown & Migration Files untuk Dosen)**:
+> - **SQL Migrations**:
+>   - [`database/migrations/001_create_tables.sql`](database/migrations/001_create_tables.sql) — Skrip DDL 14 tabel (bisa langsung di-import ke DBeaver/pgAdmin untuk auto-generate ERD visual).
+>   - [`database/migrations/002_seed_data.sql`](database/migrations/002_seed_data.sql) — Skrip seeder data master.
+> - **draw.io / diagrams.net Editable Files**:
+>   - [`docs/diagrams/erd.drawio`](docs/diagrams/erd.drawio) — File diagram ERD (bisa dibuka dan diedit di [app.diagrams.net](https://app.diagrams.net)).
+>   - [`docs/diagrams/use-case.drawio`](docs/diagrams/use-case.drawio) — File diagram Use Case (bisa dibuka dan diedit di [app.diagrams.net](https://app.diagrams.net)).
+> - **PlantUML Object/Model Files**:
+>   - [`docs/diagrams/erd.puml`](docs/diagrams/erd.puml) — Model relasional PlantUML.
+>   - [`docs/diagrams/use-case.puml`](docs/diagrams/use-case.puml) — Model UML Use Case Diagram PlantUML.
+> - **DBML (Database Markup Language)**:
+>   - [`docs/diagrams/erd.dbml`](docs/diagrams/erd.dbml) — Format skema untuk [dbdiagram.io](https://dbdiagram.io).
+> - **High-Resolution Vector SVG**:
+>   - [`docs/diagrams/erd.svg`](docs/diagrams/erd.svg) — Gambar vektor ERD mandiri (bisa dibuka langsung di browser atau disalin ke Word/PowerPoint).
+>   - [`docs/diagrams/use-case.svg`](docs/diagrams/use-case.svg) — Gambar vektor Use Case mandiri.
 
 ---
 

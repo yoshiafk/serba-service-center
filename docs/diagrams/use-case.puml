@@ -1,0 +1,97 @@
+@startuml Serba_Service_Center_UseCase
+!theme plain
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Pelanggan\n(Customer)" as Cust
+actor "Customer Service\n(CS / Loket)" as CS
+actor "Teknisi\n(Technician)" as Tech
+actor "Kasir\n(Cashier)" as Cash
+actor "Administrator\n(Supervisor)" as Admin
+
+rectangle "Sistem Informasi Serba Service Center" {
+  
+  package "Penerimaan & Tiket" {
+    usecase "UC-01: Registrasi Pelanggan & Perangkat" as UC01
+    usecase "UC-02: Penerbitan Tiket Servis" as UC02
+  }
+
+  package "Diagnosis & Estimasi" {
+    usecase "UC-03: Diagnosis Kerusakan Perangkat" as UC03
+    usecase "UC-04: Penyusunan Estimasi Biaya (Quotation)" as UC04
+    usecase "UC-05: Konfirmasi Persetujuan Estimasi" as UC05
+  }
+
+  package "Reparasi & Suku Cadang" {
+    usecase "UC-06: Pelaksanaan Reparasi Fisik" as UC06
+    usecase "UC-07: Alokasi Suku Cadang Gudang" as UC07
+    usecase "UC-08: Pemesanan Suku Cadang Indent" as UC08
+  }
+
+  package "Kendali Mutu (QC)" {
+    usecase "UC-09: Pengujian Kendali Mutu (QC Testing)" as UC09
+  }
+
+  package "Keuangan & Kasir" {
+    usecase "UC-10: Penerbitan Faktur (Invoice)" as UC10
+    usecase "UC-11: Proses Pembayaran (DP & Pelunasan)" as UC11
+  }
+
+  package "Purna Jual & Penyerahan" {
+    usecase "UC-12: Aktivasi Garansi Purna Jual" as UC12
+    usecase "UC-13: Serah Terima Perangkat (Handover)" as UC13
+  }
+
+  package "Audit & Manajemen" {
+    usecase "UC-14: Pelacakan Histori Status Servis" as UC14
+    usecase "UC-15: Pengelolaan Master Data & Inventaris" as UC15
+  }
+
+}
+
+' Asosiasi Aktor Pelanggan
+Cust -- UC01
+Cust -- UC05
+Cust -- UC11
+Cust -- UC13
+Cust -- UC14
+
+' Asosiasi Aktor CS
+CS -- UC01
+CS -- UC02
+CS -- UC05
+CS -- UC13
+CS -- UC14
+
+' Asosiasi Aktor Teknisi
+Tech -- UC03
+Tech -- UC04
+Tech -- UC06
+Tech -- UC07
+Tech -- UC09
+
+' Asosiasi Aktor Kasir
+Cash -- UC10
+Cash -- UC11
+
+' Asosiasi Aktor Admin
+Admin -- UC14
+Admin -- UC15
+
+' Relasi Include
+UC01 ..> UC02 : <<include>>
+UC03 ..> UC04 : <<include>>
+UC06 ..> UC09 : <<include>>
+UC09 ..> UC10 : <<include>>
+UC11 ..> UC12 : <<include>>
+UC12 ..> UC13 : <<include>>
+
+UC02 ..> UC14 : <<include>>
+UC03 ..> UC14 : <<include>>
+UC06 ..> UC14 : <<include>>
+UC13 ..> UC14 : <<include>>
+
+' Relasi Extend
+UC08 ..> UC07 : <<extend>>\n[Stok Gudang Kosong]
+
+@enduml
